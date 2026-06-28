@@ -3,12 +3,16 @@
 
   import { Slider as SliderPrimitive } from 'bits-ui';
 
+  import { getFieldContext } from '$lib/components/ui/field/field-context.js';
   import { cn } from '$lib/utils/utils.js';
+
+  const fieldContext = getFieldContext();
 
   let {
     ref = $bindable(null),
     value = $bindable(),
     orientation = 'horizontal',
+    id = fieldContext?.id,
     class: className,
     ...restProps
   }: WithoutChildrenOrChild<SliderPrimitive.RootProps> = $props();
@@ -22,6 +26,7 @@ get along, so we shut typescript up by casting `value` to `never`.
   bind:ref
   bind:value={value as never}
   data-slot="slider"
+  {id}
   {orientation}
   class={cn(
     'data-vertical:min-h-40 relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-vertical:h-full data-vertical:w-auto data-vertical:flex-col',
