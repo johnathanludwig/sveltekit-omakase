@@ -28,6 +28,8 @@
 
   import { cn } from '$lib/utils/utils.js';
 
+  import { setFieldContext } from './field-context.js';
+
   let {
     ref = $bindable(null),
     class: className,
@@ -37,6 +39,10 @@
   }: WithElementRef<HTMLAttributes<HTMLDivElement>> & {
     orientation?: FieldOrientation;
   } = $props();
+
+  const fieldId = $props.id();
+
+  setFieldContext({ id: fieldId });
 </script>
 
 <div

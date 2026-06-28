@@ -4,7 +4,17 @@
   import { Label } from '$lib/components/ui/label/index.js';
   import { cn } from '$lib/utils/utils.js';
 
-  let { ref = $bindable(null), class: className, children, ...restProps }: ComponentProps<typeof Label> = $props();
+  import { getFieldContext } from './field-context.js';
+
+  const fieldContext = getFieldContext();
+
+  let {
+    ref = $bindable(null),
+    class: className,
+    children,
+    for: htmlFor = fieldContext?.id,
+    ...restProps
+  }: ComponentProps<typeof Label> = $props();
 </script>
 
 <Label
@@ -15,6 +25,7 @@
     'has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col',
     className
   )}
+  for={htmlFor}
   {...restProps}
 >
   {@render children?.()}
